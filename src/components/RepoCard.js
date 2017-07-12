@@ -10,9 +10,9 @@ import {
 	Text,
 	Image,
 	TouchableOpacity,
-	FlatList,
 	StyleSheet
 } from 'react-native';
+import ImageView from './ImageView';
 
 export default class RepoCard extends Component {
 	render() {
@@ -21,12 +21,11 @@ export default class RepoCard extends Component {
 			<View>
 				<View style={styles.list}>
 					<View style={{flexDirection: 'row'}}>
-						<Image
+						<ImageView
 							source={{uri: item.owner.avatar_url}}
 							style={styles.image}
-							defaultSource={require('../../res/images/placeholder.png')}
-						  resizeMode='cover'
-						  resizeMethod='resize'
+							resizeMode='cover'
+							resizeMethod='resize'
 						/>
 						<View>
 							<Text style={[styles.desc, {marginLeft: 10}]}>{item.owner.login}</Text>
@@ -53,11 +52,12 @@ export default class RepoCard extends Component {
 
 const styles = StyleSheet.create({
 	list: {
-		marginBottom: 10,
+		marginBottom: 16,
 		padding: 10,
 		backgroundColor: '#fff',
-		borderWidth: 1,
-		borderColor: '#ddd'
+		elevation: 2
+	/*	borderWidth: 1,
+		borderColor: '#ddd'*/
 	},
 	title: {
 		marginVertical: 5,
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
 	image: {
 		width: 36,
 		height: 36,
-		backgroundColor:'#fff'
 	},
 	star: {
 		width: 20,

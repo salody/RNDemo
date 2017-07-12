@@ -48,6 +48,6 @@ export default class Popular extends BaseComponent {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#f8f8f8',
 	},
 });
