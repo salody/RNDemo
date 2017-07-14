@@ -44,7 +44,7 @@ const TabRouteConfigs = {
 	FavoriteTab: {
 		screen: FavoritePage,
 		navigationOptions: {
-			tabBarLabel: '喜欢',
+			tabBarLabel: '收藏',
 			tabBarIcon: ({ tintColor, focused }) => (<TabBarIcon
 				focused={focused}
 				tintColor={tintColor}
@@ -74,8 +74,12 @@ const TabNavigatorConfig = {
 	animationEnabled: false,
 	// backBehavior: 'none', 返回键回退到首页还是直接退出
 	tabBarOptions: {
-		activeTintColor: '#ee735c',
-		showLabel: false,
+		activeTintColor: '#fff',
+		inactiveTintColor: '#9c9c9c',
+		showLabel: true,
+		style: {
+			backgroundColor: '#212121'
+		}
 	}
 };
 

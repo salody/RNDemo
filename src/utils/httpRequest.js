@@ -1,5 +1,6 @@
 /**
- * 功能描述:
+ * 功能描述: http请求方法的封装模块
+ *
  * 2017/7/12
  * 作者：liuguanbang
  */
@@ -70,6 +71,7 @@ const config = {
 	},
 };
 
+// 使用config文件生成一个axios实例
 const instance = axios.create(config);
 
 const httpRequest = {

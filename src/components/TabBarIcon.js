@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const TabBarIcon = (props) =>
 	<Icon
 		name={props.focused ? props.focusedName : props.unfocusedName}
-	  size={26}
+	  size={24}
 		style={{color: props.tintColor}}
 	/>;
 

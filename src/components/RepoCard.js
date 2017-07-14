@@ -52,12 +52,18 @@ export default class RepoCard extends Component {
 
 const styles = StyleSheet.create({
 	list: {
-		marginBottom: 16,
-		padding: 10,
-		backgroundColor: '#fff',
-		elevation: 2
-	/*	borderWidth: 1,
-		borderColor: '#ddd'*/
+		marginBottom: 8,
+		padding: 16,
+		backgroundColor: '#fafafa',
+		elevation: 2,
+		shadowColor: 'gray',
+		shadowOffset: {
+			width: 1,
+			height: 1
+		},
+		shadowOpacity: 0.6,
+		shadowRadius: 1,
+		borderRadius: 2
 	},
 	title: {
 		marginVertical: 5,
@@ -86,6 +92,6 @@ const styles = StyleSheet.create({
 	star: {
 		width: 20,
 		height: 20,
-		tintColor: '#ee735c'
+		tintColor: '#F44336'
 	}
 });

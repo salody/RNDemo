@@ -1,5 +1,11 @@
 /**
  * 功能描述:
+ * 2017/7/14
+ * 作者：liuguanbang
+ */
+
+/**
+ * 功能描述:
  * 2017/7/7
  * 作者：liuguanbang
  */
@@ -15,7 +21,7 @@ import BaseComponent from '../components/BaseComponent'
 import NavigationBar from '../components/NavigationBar';
 import GlobalStyle from '../common/GlobalStyles'
 
-export default class Trending extends BaseComponent {
+export default class Grid extends BaseComponent {
 	render() {
 		return (
 			<View style={styles.container}>
@@ -117,7 +123,7 @@ export default class Trending extends BaseComponent {
 						</View>
 					</View>
 				</View>
-				</View>
+			</View>
 		);
 	}
 }

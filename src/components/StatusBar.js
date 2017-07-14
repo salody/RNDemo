@@ -1,4 +1,10 @@
 /**
+ * 功能描述:
+ * 2017/7/12
+ * 作者：liuguanbang
+ */
+
+/**
  * 功能描述:NavigationBar.包含状态栏
  * 2017/7/7
  * 作者：liuguanbang
@@ -11,7 +17,6 @@ import {
 	Platform,
 	TouchableOpacity,
 	StatusBar,
-	Animated,
 	Text,
 	View
 } from 'react-native'
@@ -107,32 +112,12 @@ export default class NavigationBar extends Component {
 	}
 
 	render() {
-		let statusBar = !this.props.statusBar.hidden ?
-			<View style={styles.statusBar}>
-				<StatusBar {...this.props.statusBar}
-				           backgroundColor="#D32F2F"
-				           barStyle="light-content"
-				           style={styles.statusBar}/>
-			</View>: null;
 
-		let titleView = this.props.titleView ? this.props.titleView :
-			<Text style={styles.title} ellipsizeMode="head" numberOfLines={1} >{this.props.title}</Text>;
 
-		let content = this.props.hide ? null :
-			<View style={styles.navBar}>
-				{/*{this.leftView()}*/}
-				{this.getButtonElement(this.props.leftButton)}
-				<View style={[styles.navBarTitleContainer,this.props.titleLayoutStyle]}>
-					{titleView}
-				</View>
-				{/*{this.rightView()}*/}
-				{this.getButtonElement(this.props.rightButton, {marginRight: 8,})}
-			</View>;
 		return (
-			<Animated.View style={[styles.container, this.props.style]}>
+			<View style={[styles.container, this.props.style]}>
 				{statusBar}
-				{content}
-			</Animated.View>
+			</View>
 		)
 	}
 }
@@ -171,7 +156,6 @@ const styles = StyleSheet.create({
 	container: {
 		width: GlobalStyles.window_width,
 		backgroundColor: '#F44336',
-		elevation: 4
 	},
 	navBar: {
 		flexDirection: 'row',
@@ -204,6 +188,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	statusBar: {
-		height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 0,
+		height: Platform.OS === 'ios' ? STATUS_BAR_HEIGHT : 24,
 	},
 })
