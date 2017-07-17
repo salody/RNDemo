@@ -46,7 +46,7 @@ export default class Popular extends BaseComponent {
 			this.yPre = event.nativeEvent.contentOffset.y;
 
 			// 向上滑动
-			if(this.yNow - this.yPre > 10) {
+			if (this.yNow - this.yPre > 10) {
 				this.navBar.transitionTo({
 					opacity: 0,
 				});
@@ -55,7 +55,7 @@ export default class Popular extends BaseComponent {
 					opacity: 1,
 				});
 			}
-		}, 50)
+		}, 30)
 	}
 
 	renderHeader() {
@@ -82,8 +82,8 @@ export default class Popular extends BaseComponent {
 				style={styles.container}
 			>
 				<Animatable.View
-				  ref={(navBar) => this.navBar = navBar}
-				  style={styles.navBar}
+					ref={(navBar) => this.navBar = navBar}
+					style={styles.navBar}
 				>
 					<NavigationBar
 						title="Popular"
