@@ -8,21 +8,13 @@ import React from 'react';
 import {
 	View,
 	FlatList,
-	Animated,
-	ScrollView,
-	PanResponder,
-	TouchableOpacity,
-	TouchableWithoutFeedback,
-	Dimensions,
 	StyleSheet
 } from 'react-native';
 import BaseComponent from '../components/BaseComponent';
 import NavigationBar from '../components/NavigationBar';
 import RepoCard from '../components/RepoCard';
-import GlobalStyles from '../common/GlobalStyles'
-import {api} from '../api';
 import * as Animatable from 'react-native-animatable';
-//NavigationBar = Animatable.createAnimatableComponent(NavigationBar);
+import {api} from '../api';
 const data = api.items;
 
 
@@ -36,7 +28,11 @@ export default class Popular extends BaseComponent {
 
 
 	handleScroll(event: Object) {
-		event.persist()
+		// If you want to access the event properties in an asynchronous way,
+		// you should call event.persist() on the event,
+		// which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
+		// 详情参考: https://facebook.github.io/react/docs/events.html
+		event.persist();
 		this.event = event;
 
 		// 当前触发的y
@@ -45,21 +41,30 @@ export default class Popular extends BaseComponent {
 			if (this.timer) {
 				clearTimeout(this.timer);
 			}
+
+			// 异步之前的y值
 			this.yPre = event.nativeEvent.contentOffset.y;
 
 			// 向上滑动
-			if(this.yNow - this.yPre > 50) {
-				this.refs.container.transitionTo({
-					transform: [{translateY: -70}],
-				}, 100, 'linear');
-			} else if (this.yNow - this.yPre < -50) {
-				this.refs.container.transitionTo({
-					transform: [{translateY: -3}],
-				}, 100, 'linear');
+			if(this.yNow - this.yPre > 10) {
+				this.navBar.transitionTo({
+					opacity: 0,
+				});
+			} else if (this.yNow - this.yPre < -10) {   // 向下滑动
+				this.navBar.transitionTo({
+					opacity: 1,
+				});
 			}
-		}, 200)
+		}, 50)
 	}
 
+	renderHeader() {
+		return (
+			<View
+				style={{height: 50}}
+			/>
+		);
+	}
 
 	renderItem({item}) {
 		return (
@@ -73,42 +78,44 @@ export default class Popular extends BaseComponent {
 	render() {
 		return (
 
-			<Animatable.View
-				ref="container"
+			<View
 				style={styles.container}
-				transition='translateY'
 			>
-				<NavigationBar
-					title="Popular"
-					style={[styles.navBar,]}
-				/>
+				<Animatable.View
+				  ref={(navBar) => this.navBar = navBar}
+				  style={styles.navBar}
+				>
+					<NavigationBar
+						title="Popular"
+					/>
+				</Animatable.View>
+
 				<FlatList
 					data={data}
 					renderItem={this.renderItem}
 					keyExtractor={this._keyExtractor}
-					style={[styles.listContainer,]}
+					style={styles.listContainer}
 					showsVerticalScrollIndicator={false}
 					onScroll={this.handleScroll}
-					scrollEventThrottle={16}
+					scrollEventThrottle={1}    // 值越小，触发的事件越多
+					ListHeaderComponent={this.renderHeader}
 				/>
-
-
-			</Animatable.View>
+			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		width: GlobalStyles.window_width,
-		height: GlobalStyles.window_height,
+		flex: 1,
 		backgroundColor: '#eee',
-		position: 'relative',
-		transform: [{translateY: 0}]
 	},
 	listContainer: {
 		padding: 8,
-		flex: 1,
 	},
-
+	navBar: {
+		opacity: 1,
+		position: 'absolute',
+		zIndex: 10
+	}
 });
